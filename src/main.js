@@ -1,4 +1,4 @@
-import PenroseAlpha from './penrose-alpha'
+import Tile from './tile'
 
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
@@ -15,7 +15,8 @@ context.scale(scale, scale)
 
 const tilesInView = new Set()
 
-tilesInView.add(new PenroseAlpha())
+tilesInView.add(new Tile(false))
+tilesInView.add(new Tile(true))
 
 function draw() {
     requestAnimationFrame(draw)
