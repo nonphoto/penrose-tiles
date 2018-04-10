@@ -1,7 +1,9 @@
-import { degToRad } from './util'
+import { degToRad, matrixToTransform } from './util'
+import { Matrix3 } from 'three'
 
 export default class Tile {
-    constructor(alt) {
+    constructor(transform, alt) {
+        this.transform = transform || new Matrix3()
         this.alt = alt
 
         this.a = alt ? degToRad(18) : degToRad(36)
@@ -17,6 +19,9 @@ export default class Tile {
     }
 
     draw(context) {
+        context.save()
+        context.transform(...matrixToTransform(this.transform))
         context.stroke(this.path)
+        context.restore()
     }
 }

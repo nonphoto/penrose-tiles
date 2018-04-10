@@ -1,3 +1,4 @@
+import { Matrix3 } from 'three'
 import Tile from './tile'
 
 const canvas = document.getElementById('canvas')
@@ -15,8 +16,15 @@ context.scale(scale, scale)
 
 const tilesInView = new Set()
 
-tilesInView.add(new Tile(false))
-tilesInView.add(new Tile(true))
+const leftTransform = new Matrix3()
+leftTransform.setUvTransform(-2, 0, 1, 1, 0, 0, 0)
+const leftTile = new Tile(leftTransform, false)
+tilesInView.add(leftTile)
+
+const rightTransform = new Matrix3()
+rightTransform.setUvTransform(2, 0, 1, 1, 0, 0, 0)
+const rightTile = new Tile(rightTransform, true)
+tilesInView.add(rightTile)
 
 function draw() {
     requestAnimationFrame(draw)
