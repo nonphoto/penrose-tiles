@@ -93,13 +93,36 @@ export default class Tile {
 
     draw(context) {
         context.save()
+
+        context.strokeStyle = 'gray'
         context.translate(this.position.x, this.position.y)
         context.rotate(this.rotation)
         context.stroke(this.path)
-        context.strokeStyle = 'red'
-        context.moveTo(0, 0)
-        context.lineTo(0, -this.dimensions.y)
-        context.stroke()
+
+        context.lineWidth = 0.1
+        if (this.type) {
+            context.strokeStyle = 'yellow'
+            context.beginPath()
+            context.arc(0, -this.dimensions.y, 0.2, this.internalAngle, Math.PI - this.internalAngle)
+            context.stroke()
+
+            context.strokeStyle = 'red'
+            context.beginPath()
+            context.arc(0, this.dimensions.y, 0.2, Math.PI + this.internalAngle, -this.internalAngle)
+            context.stroke()
+        }
+        else {
+            context.strokeStyle = 'yellow'
+            context.beginPath()
+            context.arc(-this.dimensions.x, 0, 0.2, -this.internalAngle, this.internalAngle)
+            context.stroke()
+
+            context.strokeStyle = 'red'
+            context.beginPath()
+            context.arc(this.dimensions.x, 0, 0.8, Math.PI - this.internalAngle, Math.PI + this.internalAngle)
+            context.stroke()
+        }
+
         context.restore()
     }
 }
