@@ -1,32 +1,8 @@
-import { degToRad } from './util'
+import { degToRad, Edge, Direction } from './util'
 import { Vector2 } from 'three'
 
 const alpha = degToRad(18)
 const beta = degToRad(36)
-
-const Edge = {
-    a: 0,
-    b: 1,
-    c: 2,
-    d: 3,
-
-    opposite: (e) => {
-        if (e % 2 === 0) {
-            return e + 1
-        }
-        else {
-            return e - 1
-        }
-    }
-}
-
-const Direction = {
-    NE: 0,
-    NW: 1,
-    SW: 2,
-    SE: 3,
-    count: 4
-}
 
 export default class Tile {
     constructor(type) {
