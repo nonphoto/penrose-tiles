@@ -13,11 +13,9 @@ context.lineWidth = 1 / scale
 context.translate(canvas.width / 2, canvas.height / 2)
 context.scale(scale, scale)
 
-const tilesInView = new Set()
 const firstTile = new Tile()
-const secondTile = firstTile.createNeighbor()
-tilesInView.add(firstTile)
-tilesInView.add(secondTile)
+const neighbors = firstTile.createNeighbors()
+const tilesInView = [firstTile].concat(neighbors)
 
 function draw() {
     requestAnimationFrame(draw)
