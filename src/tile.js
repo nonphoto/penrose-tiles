@@ -59,7 +59,9 @@ export default class Tile {
 
             neighbor.rotation = this.rotationsByDirection[direction] - neighbor.rotationsByDirection[neighborDirection] + Math.PI
 
-            neighbor.position = this.positionsByDirection[direction].clone().rotateAround(new Vector2(), this.rotation).sub(neighbor.positionsByDirection[neighborDirection].clone().rotateAround(new Vector2(), neighbor.rotation))
+            const toEdge = this.positionsByDirection[direction].clone().rotateAround(new Vector2(), this.rotation)
+            const toNeighborEdge = neighbor.positionsByDirection[neighborDirection].clone().rotateAround(new Vector2(), neighbor.rotation)
+            neighbor.position = toEdge.sub(toNeighborEdge)
 
             neighbors.push(neighbor)
         }
